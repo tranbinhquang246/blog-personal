@@ -1,4 +1,12 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
+
+const colors = require('tailwindcss/colors');
+
+delete colors['lightBlue'];
+delete colors['warmGray'];
+delete colors['trueGray'];
+delete colors['coolGray'];
+delete colors['blueGray'];
 
 const config: Config = {
   content: [
@@ -7,14 +15,21 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      ...colors,
+      // Define more color
+    },
+    fontFamily: {
+      // Roboto mono
+      primary: ['var(--font-primary)', 'sans-serif'],
+
+      // Montserrat
+      secondary: ['var(--font-secondary)', 'sans-serif'],
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      backgroundImage: {},
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;
