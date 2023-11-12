@@ -8,7 +8,7 @@ type Props = {
 const authLayout = ({ children, className }: Props) => {
   return (
     <div
-      className={`flex justify-center items-center fixed w-full h-full ${className}`}>
+      className={`flex justify-center items-center w-full h-full ${className}`}>
       {children}
     </div>
   );

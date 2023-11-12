@@ -4,7 +4,13 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  password: string;
   role: RoleTypes;
-  access_token?: string;
+  profile: ProfileUser;
+}
+
+export interface ProfileUser {
+  avatar: string;
+  firstName: string;
+  lastName: string;
+  userId: string;
 }

@@ -31,8 +31,8 @@ export default function Login({}: Props) {
 
   const userLoginFn = async () => {
     return await signIn('sign-in', {
-      email: email,
-      password: password,
+      email: 'a@gmail.com',
+      password: '12345678',
       redirect: false,
     });
   };
@@ -48,7 +48,9 @@ export default function Login({}: Props) {
     },
   });
 
-  const onSubmit: SubmitHandler<ILogin> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<ILogin> = (data) => {
+    userLogin();
+  };
 
   return (
     <AuthLayout>
@@ -81,7 +83,7 @@ export default function Login({}: Props) {
         </form>
         <div className="flex gap-2 text-center">
           <p className="font-light">Don't have an account? </p>
-          <Link href={''} className="hover:underline">
+          <Link href="/auth/signup" className="hover:underline">
             Sign up
           </Link>
         </div>

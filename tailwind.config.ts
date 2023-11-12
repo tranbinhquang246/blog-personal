@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 delete colors['lightBlue'];
 delete colors['warmGray'];
@@ -17,7 +18,16 @@ const config: Config = {
   theme: {
     colors: {
       ...colors,
-      // Define more color
+      yellow: '#FFD050',
+      purple: '#592EA9',
+      darkgrey: '#4C4C4C',
+      mediumgray: '#6D6E76',
+      lightgrey: '#F4F4F4',
+      lavender: '#F4F0F8',
+    },
+    screens: {
+      xs: '480px',
+      ...defaultTheme.screens,
     },
     fontFamily: {
       // Roboto mono

@@ -1,7 +1,7 @@
 import api from '@/app/_base/api';
 import { apiRouters } from '@/app/_constants/routers';
-import { User } from '@/app/_types';
 import { decodeToken } from '@/app/_utils';
+import { User } from '@app/_interfaces/user';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 export const options: NextAuthOptions = {
@@ -36,7 +36,7 @@ export const options: NextAuthOptions = {
     },
     async jwt(params) {
       const { token, trigger, session } = params;
-      const user = params.user as unknown as any;
+      const user = params.user as unknown as User;
       if (trigger === 'update' && session && token) {
         if (session.email) {
           (token.user as any).email = session.email;
@@ -45,15 +45,11 @@ export const options: NextAuthOptions = {
           (token.user as any).name = session.username;
         }
         if (session.role) {
-          (token.user as any).role_id = session.role;
+          (token.user as any).role = session.role;
         }
       }
       if (user) {
         token.user = user;
-      }
-      if (user?.access_token) {
-        token.user = user;
-        token.access_token = user.access_token;
       }
       return { ...token, ...user };
     },
