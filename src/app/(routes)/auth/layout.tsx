@@ -1,16 +1,23 @@
+import { getServerSession } from 'next-auth';
 import React, { ReactNode } from 'react';
 
+import { options } from '@app/api/auth/[...nextauth]/options';
+import { redirect } from 'next/navigation';
+
 type Props = {
-  className?: string;
   children: ReactNode;
 };
 
-const authLayout = ({ children, className }: Props) => {
+const authLayout = async ({ children }: Props) => {
+  const session = await getServerSession(options);
+  if (session && session.access_token && session.user) {
+    redirect('/');
+  }
   return (
-    <div
-      className={`flex justify-center items-center fixed w-full h-full ${className}`}>
+    <main
+      className={`flex justify-center items-center flex-grow w-full h-full`}>
       {children}
-    </div>
+    </main>
   );
 };
 

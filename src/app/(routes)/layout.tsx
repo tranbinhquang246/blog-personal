@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { fontPrimary, fontSecondary } from '@app/_utils/fonts';
 import SessionProvider from '@app/_context/provider-session';
@@ -8,6 +9,8 @@ import { QueryProvider } from '@app/_context/provider-query';
 import Header from '@app/_components/layouts/Header';
 import Footer from '@app/_components/layouts/Footer';
 import { options } from '@app/api/auth/[...nextauth]/options';
+import { LoadingProvider } from '@app/_context/loading';
+import ToastProvider from '@app/_context/toast';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -26,9 +29,13 @@ export default async function RootLayout({
         className={`${fontPrimary.variable} ${fontSecondary.variable} flex flex-col min-h-screen w-full bg-white font-primary`}>
         <SessionProvider session={session}>
           <QueryProvider>
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            <ToastProvider>
+              <LoadingProvider>
+                <Header />
+                {children}
+                <Footer />
+              </LoadingProvider>
+            </ToastProvider>
           </QueryProvider>
         </SessionProvider>
       </body>
