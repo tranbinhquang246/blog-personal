@@ -1,9 +1,11 @@
 'use client';
 import { Fragment, ReactNode, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 
-import { logo } from 'public/images';
+import { AuthenticationStatus } from '@app/_constants/enums';
 import {
   CloseIcon,
   DefaultUserIcon,
@@ -12,13 +14,12 @@ import {
   MenuIcon,
   SettingIcon,
 } from 'public/icons';
-import Link from 'next/link';
-import { useSession } from 'next-auth/react';
-import { AuthenticationStatus } from '@app/_constants/enums';
+import { logo } from 'public/images';
+import { pageRouter } from '@app/_constants/routers';
 
 type Props = { className?: string; link?: string; children?: ReactNode };
 
-const Header = ({ link, children, className }: Props) => {
+const Header = ({}: Props) => {
   const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openPopupUser, setOpenPopupUser] = useState(false);
@@ -28,7 +29,7 @@ const Header = ({ link, children, className }: Props) => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link href={pageRouter.HOME} className="-m-1.5 p-1.5">
             <Image alt="Logo header" src={logo} width={40} height={40} />
           </Link>
         </div>
@@ -41,7 +42,9 @@ const Header = ({ link, children, className }: Props) => {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12 text-black">
-          <Link href="/" className="text-sm font-semibold leading-6">
+          <Link
+            href={pageRouter.HOME}
+            className="text-sm font-semibold leading-6">
             Home
           </Link>
           <Link href="#" className="text-sm font-semibold leading-6">
@@ -56,7 +59,9 @@ const Header = ({ link, children, className }: Props) => {
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {status === AuthenticationStatus.UNAUTHENTICATED ? (
-            <Link href="auth/login" className="text-sm font-semibold leading-6">
+            <Link
+              href={pageRouter.LOGIN}
+              className="text-sm font-semibold leading-6">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
           ) : (
@@ -67,17 +72,17 @@ const Header = ({ link, children, className }: Props) => {
                     className="flex w-full gap-1 items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7"
                     onClick={() => setOpenPopupUser(!openPopupUser)}>
                     <Image
-                      src={session?.user.profile.avatar || DefaultUserIcon}
+                      src={session?.user?.profile?.avatar || DefaultUserIcon}
                       alt="Default user icon"
                       width={30}
                       height={30}
                     />
                     <p>
-                      {session?.user.profile.firstName +
-                        session?.user.profile.firstName ||
-                        session?.user.profile.firstName ||
-                        session?.user.profile.lastName ||
-                        session?.user.role}
+                      {session?.user?.profile?.firstName +
+                        session?.user?.profile?.firstName ||
+                        session?.user?.profile?.firstName ||
+                        session?.user?.profile?.lastName ||
+                        session?.user?.role}
                     </p>
                     <Image
                       src={DownIcon}
@@ -110,9 +115,11 @@ const Header = ({ link, children, className }: Props) => {
                         />
                         Profile
                       </Link>
-                      <div className="flex gap-2 hover:bg-lightgrey hover:cursor-pointer p-3">
+                      <div
+                        className="flex gap-2 hover:bg-lightgrey hover:cursor-pointer p-3"
+                        onClick={() => signOut()}>
                         <Image
-                          alt="Signout"
+                          alt="SignOut"
                           src={LogoutIcon}
                           width={18}
                           height={18}
@@ -142,7 +149,6 @@ const Header = ({ link, children, className }: Props) => {
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-black"
               onClick={() => setMobileMenuOpen(false)}>
-              <span className="sr-only">Close menu</span>
               <Image
                 src={CloseIcon}
                 alt="Close header"
@@ -154,33 +160,75 @@ const Header = ({ link, children, className }: Props) => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6 text-black">
-                <a
+                <Link
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-200">
-                  Product
-                </a>
-                <a
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-white">
+                  Home
+                </Link>
+                <Link
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-200">
-                  Features
-                </a>
-                <a
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-white">
+                  Blogs
+                </Link>
+                <Link
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-200">
-                  Marketplace
-                </a>
-                <a
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-white">
+                  About me
+                </Link>
+                <Link
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-200">
-                  Company
-                </a>
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-white">
+                  Contact me
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-200">
-                  Log in
-                </a>
+                {status === AuthenticationStatus.UNAUTHENTICATED ? (
+                  <Link
+                    href={pageRouter.LOGIN}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-white">
+                    Log in
+                  </Link>
+                ) : (
+                  <div className="flex flex-col">
+                    <div className="flex gap-3 items-center py-2">
+                      <Image
+                        src={session?.user?.profile?.avatar || DefaultUserIcon}
+                        alt="Default user icon"
+                        width={30}
+                        height={30}
+                      />
+                      <p>
+                        {session?.user?.profile?.firstName +
+                          session?.user?.profile?.firstName ||
+                          session?.user?.profile?.firstName ||
+                          session?.user?.profile?.lastName ||
+                          session?.user?.role}
+                      </p>
+                    </div>
+                    <Link
+                      href={'/'}
+                      className="flex gap-2 hover:bg-white py-2 px-5">
+                      <Image
+                        alt="Setting profile"
+                        src={SettingIcon}
+                        width={18}
+                        height={18}
+                      />
+                      Profile
+                    </Link>
+                    <div
+                      className="flex gap-2 hover:bg-white hover:cursor-pointer py-2 px-5"
+                      onClick={() => signOut()}>
+                      <Image
+                        alt="SignOut"
+                        src={LogoutIcon}
+                        width={18}
+                        height={18}
+                      />
+                      Signout
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

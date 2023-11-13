@@ -8,7 +8,7 @@ type Props = { className?: string };
 const navigation = {
   main: [
     { name: 'Home', href: '#' },
-    { name: 'Blog', href: '#' },
+    { name: 'Blogs', href: '#' },
     { name: 'About me', href: '#' },
     { name: 'Contact me', href: '#' },
   ],
@@ -61,7 +61,7 @@ const Footer = ({ className }: Props) => {
           ))}
         </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; 2023 Hanah QB
+          &copy; 2023 Lorem ipsums
         </p>
       </div>
     </footer>

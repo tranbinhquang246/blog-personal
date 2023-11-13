@@ -9,6 +9,8 @@ import DefaultUserIcon from './default-user.svg';
 import DownIcon from './down.svg';
 import SettingIcon from './setting.svg';
 import LogoutIcon from './logout.svg';
+import EyeIcon from './eye.svg';
+import CloseEyeIcon from './close-eye.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -21,4 +23,6 @@ export {
   DownIcon,
   SettingIcon,
   LogoutIcon,
+  EyeIcon,
+  CloseEyeIcon,
 };

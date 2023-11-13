@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
 import Image from 'next/image';
 import ErrorMessage from './ErrorMessage';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 export type InputSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -13,6 +14,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   icon?: string;
   error?: ReactNode;
   required?: boolean;
+  register?: UseFormRegisterReturn;
 };
 
 const Input = ({
@@ -25,6 +27,7 @@ const Input = ({
   required,
   error,
   icon,
+  register,
   ...props
 }: Props) => {
   const errorClasses = error ? '!border-danger' : 'border-neutral-06';
@@ -52,10 +55,10 @@ const Input = ({
         <input
           type={type}
           className={`rounded-md leading-tight focus:!outline-none focus:!shadow-none focus:border-inherit focus:ring-neutral-07 border placeholder-neutral-07 ${errorClasses} ${className}`}
+          {...register}
           {...props}
         />
       </div>
-
       <ErrorMessage error={error} />
     </div>
   );
