@@ -1,6 +1,9 @@
 export const apiRouters = {
   LOGIN: 'auth/sign-in',
   SIGNUP: 'auth/sign-up',
+  GET_USERS: '/users/all',
+  GET_USER: (id: string) => `/users/${id}`,
+  DELETE_USER: (id: string) => `users/delete/${id}`,
 };
 
 export const pageRouter = {

@@ -16,6 +16,10 @@ import PostIcon from './post.svg';
 import CategoryIcon from './category.svg';
 import TagIcon from './tag.svg';
 import AuthorIcon from './author.svg';
+import SearchIcon from './search.svg';
+import EditIcon from './edit.svg';
+import DeleteIcon from './delete.svg';
+import WarningIcon from './warning.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -35,4 +39,8 @@ export {
   CategoryIcon,
   PostIcon,
   TagIcon,
+  SearchIcon,
+  DeleteIcon,
+  EditIcon,
+  WarningIcon,
 };

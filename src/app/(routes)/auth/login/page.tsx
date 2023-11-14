@@ -124,7 +124,9 @@ export default function Login() {
           className="text-sm font-light text-right hover:font-normal">
           Forgot password
         </Link>
-        <Button type="submit">Login</Button>
+        <Button type="submit" className="h-14">
+          Login
+        </Button>
       </form>
       <div className="flex gap-2 text-center">
         <p className="font-light">Don't have an account? </p>

@@ -12,11 +12,11 @@ type Props = {
 
 const adminLayout = async ({ children }: Props) => {
   const session = await getServerSession(options);
-  if (
-    session &&
-    session.access_token &&
-    session.user.role !== RoleTypes.ADMIN
-  ) {
+  if (!session) {
+    redirect('/');
+  }
+
+  if (session && session.user.role !== RoleTypes.ADMIN) {
     redirect('/');
   }
   return (
