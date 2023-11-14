@@ -168,7 +168,9 @@ const SignUp = () => {
           )}
         </div>
 
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" className="h-14">
+          Sign Up
+        </Button>
       </form>
       <div className="flex gap-2 text-center">
         <p className="font-light">Have an account? </p>

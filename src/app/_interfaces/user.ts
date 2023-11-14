@@ -1,10 +1,12 @@
 import { RoleTypes } from '@app/_constants/enums';
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
   role: RoleTypes;
+  createdAt: string;
+  updatedAt: string;
   profile: ProfileUser;
 }
 
