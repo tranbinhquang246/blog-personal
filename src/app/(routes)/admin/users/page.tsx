@@ -159,9 +159,7 @@ const UserManagement = () => {
       toast.success('Delete successfully');
       refetchListUsers();
     },
-    onError: (errors) => {
-      console.log(errors);
-    },
+    onError: () => {},
     onSettled: () => {
       setIsLoading(false);
       setOpenModalConfirmDelete(false);
