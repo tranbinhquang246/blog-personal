@@ -13,17 +13,12 @@ import { toast } from 'react-toastify';
 import Button from '@app/_components/common/Button';
 import Input from '@app/_components/common/Input';
 import { LoadingContext } from '@app/_context/loading';
-import {
-  DeleteIcon,
-  EditIcon,
-  EyeIcon,
-  SearchIcon,
-  UserIcon,
-} from 'public/icons';
+import ConfirmDeleteUserModal from '@app/_components/modals/ConfirmDeleteUserModal';
+
 import api from '@app/_base/api';
 import { apiRouters } from '@app/_constants/routers';
 import { User } from '@app/_interfaces/user';
-import ConfirmDeleteUserModal from '@app/_components/modals/ConfirmDeleteUserModal';
+import { DeleteIcon, EyeIcon, SearchIcon, UserIcon } from 'public/icons';
 
 const columnHelper = createColumnHelper<User>();
 
@@ -208,7 +203,7 @@ const UserManagement = () => {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
-                  <div className="flex w-full h-full justify-center items-center">
+                  <div className="flex w-full h-full justify-center items-center my-1">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </div>
                 </td>

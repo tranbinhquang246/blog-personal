@@ -20,6 +20,7 @@ import SearchIcon from './search.svg';
 import EditIcon from './edit.svg';
 import DeleteIcon from './delete.svg';
 import WarningIcon from './warning.svg';
+import ActiveIcon from './active.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -43,4 +44,5 @@ export {
   DeleteIcon,
   EditIcon,
   WarningIcon,
+  ActiveIcon,
 };
