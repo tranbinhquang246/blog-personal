@@ -9,7 +9,6 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   sz?: InputSize;
   label?: string;
   type?: string;
-  full?: boolean;
   labelClassName?: string;
   icon?: string;
   error?: ReactNode;
@@ -21,7 +20,6 @@ const Input = ({
   sz = 'md',
   label,
   type = 'text',
-  full,
   labelClassName,
   className,
   required,

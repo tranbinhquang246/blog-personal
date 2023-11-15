@@ -36,10 +36,10 @@ const Modal = ({ open, title, children, className, onClose }: Props) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <Dialog.Panel className="w-fit transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-fit transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all overflow-y-auto">
                 <div className={className}>
                   {title && (
-                    <header className="flex justify-between items-center mb-10">
+                    <header className="flex justify-between items-center mb-5">
                       <p className="leading-10 text-neutral-01 text-xl">
                         {title}
                       </p>
