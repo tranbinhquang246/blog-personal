@@ -8,6 +8,9 @@ export const apiRouters = {
 
   CATEGORY_LIST: '/category',
   CATEGORY_DETAIL: (id: string) => `/category/${id}`,
+
+  TAG_LIST: '/tag',
+  TAG_DETAIL: (id: string) => `/tag/${id}`,
 };
 
 export const pageRouter = {

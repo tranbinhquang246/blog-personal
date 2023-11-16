@@ -9,11 +9,13 @@ import Button from '../common/Button';
 import Switch from '../common/Switch';
 
 import { Category, CategoryForm } from '@app/_interfaces/category';
+import { Tag } from '@app/_interfaces/tag';
 
 type Props = {
   open: boolean;
   type: 'update' | 'create';
-  data?: Category;
+  variant?: 'Category' | 'Tag';
+  data?: Category | Tag;
   onSubmit: SubmitHandler<CategoryForm>;
   onClose: () => void;
 };
@@ -23,8 +25,9 @@ const schema = yup.object().shape({
   isPublic: yup.boolean().required('This field must not empty!'),
 });
 
-const CreateCategoryModal = ({
+const CreateCategoryOrTagModal = ({
   open,
+  variant,
   data,
   type,
   onClose,
@@ -67,12 +70,12 @@ const CreateCategoryModal = ({
   return (
     <Modal
       open={open}
-      title={type === 'create' ? 'Create Category' : 'Update Category'}
+      title={type === 'create' ? `Create ${variant}` : `Update ${variant}`}
       onClose={handleCloseModal}
       className="w-[calc(100vw_/_2)] min-w-[384px]">
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
         <Input
-          label="Category name"
+          label={`${variant} name`}
           register={register('name')}
           className="w-full h-11 p-5 text-sm font-light"
           error={errors.name?.message}
@@ -85,7 +88,7 @@ const CreateCategoryModal = ({
           render={({ field: { onChange, value } }) => (
             <Switch
               checked={value}
-              label="Public category"
+              label={`Public ${variant.toLowerCase()}`}
               onSwitchChange={onChange}
             />
           )}
@@ -106,4 +109,4 @@ const CreateCategoryModal = ({
   );
 };
 
-export default CreateCategoryModal;
+export default CreateCategoryOrTagModal;

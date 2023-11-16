@@ -14,8 +14,8 @@ import { AxiosError } from 'axios';
 
 import Button from '@app/_components/common/Button';
 import Input from '@app/_components/common/Input';
-import CreateCategoryModal from '@app/_components/modals/CreateCategoryModal';
-import ConfirmDeleteCategory from '@app/_components/modals/ConfirmDeleteCategory';
+import CreateCategoryOrTagModal from '@app/_components/modals/CreateCategoryOrTagModal';
+import ConfirmDelete from '@app/_components/modals/ConfirmDelete';
 
 import { Category, CategoryForm } from '@app/_interfaces/category';
 import { ErrorResponse } from '@app/_interfaces';
@@ -273,26 +273,31 @@ const Categories = () => {
           ))}
         </tbody>
       </table>
-      <CreateCategoryModal
+      <CreateCategoryOrTagModal
         open={openModalCreateCategory}
         type="create"
+        variant="Category"
         onSubmit={onSubmitCreateCategory}
-        onClose={() => setOpenModalCreateCategory(false)}></CreateCategoryModal>
+        onClose={() =>
+          setOpenModalCreateCategory(false)
+        }></CreateCategoryOrTagModal>
 
-      <CreateCategoryModal
+      <CreateCategoryOrTagModal
         open={openModalUpdateCategory}
         type="update"
+        variant="Category"
         data={categorySelected}
         onSubmit={onSubmitUpdateCategory}
-        onClose={() => setOpenModalUpdateCategory(false)}></CreateCategoryModal>
-
-      <ConfirmDeleteCategory
-        open={openModalConfirmDelete}
-        category={categorySelected}
-        onConfirm={() => handleConfirmDeleteCategory()}
         onClose={() =>
-          setOpenModalConfirmDelete(false)
-        }></ConfirmDeleteCategory>
+          setOpenModalUpdateCategory(false)
+        }></CreateCategoryOrTagModal>
+
+      <ConfirmDelete
+        open={openModalConfirmDelete}
+        variant="Category"
+        data={categorySelected?.name}
+        onConfirm={() => handleConfirmDeleteCategory()}
+        onClose={() => setOpenModalConfirmDelete(false)}></ConfirmDelete>
     </div>
   );
 };
