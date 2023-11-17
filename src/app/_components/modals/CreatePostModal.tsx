@@ -55,6 +55,10 @@ const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
     onClose();
   };
 
+  useEffect(() => {
+    !open && reset();
+  }, [open]);
+
   const checkKeyDown = (e: any) => {
     if (e.key === 'Enter') e.preventDefault();
   };
