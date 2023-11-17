@@ -62,6 +62,12 @@ const CreateCategoryOrTagModal = ({
     data && reset(defaultValues);
   }, [data, reset, defaultValues]);
 
+  useEffect(() => {
+    if (!open) {
+      reset();
+    }
+  }, [open]);
+
   const handleCloseModal = () => {
     reset();
     onClose();
@@ -88,7 +94,7 @@ const CreateCategoryOrTagModal = ({
           render={({ field: { onChange, value } }) => (
             <Switch
               checked={value}
-              label={`Public ${variant.toLowerCase()}`}
+              label={`Public ${variant?.toLowerCase()}`}
               onSwitchChange={onChange}
             />
           )}

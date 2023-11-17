@@ -8,7 +8,7 @@ import { WarningIcon } from 'public/icons';
 
 type Props = {
   open: boolean;
-  variant?: 'Category' | 'Tag';
+  variant?: 'Category' | 'Tag' | 'Author';
   data?: string;
   onConfirm: () => void;
   onClose: () => void;

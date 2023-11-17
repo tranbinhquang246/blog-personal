@@ -21,6 +21,7 @@ import EditIcon from './edit.svg';
 import DeleteIcon from './delete.svg';
 import WarningIcon from './warning.svg';
 import ActiveIcon from './active.svg';
+import AddIcon from './add.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -45,4 +46,5 @@ export {
   EditIcon,
   WarningIcon,
   ActiveIcon,
+  AddIcon,
 };
