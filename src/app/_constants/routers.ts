@@ -11,6 +11,9 @@ export const apiRouters = {
 
   TAG_LIST: '/tag',
   TAG_DETAIL: (id: string) => `/tag/${id}`,
+
+  AUTHOR_LIST: '/author',
+  AUTHOR_DETAIL: (id: string) => `/author/${id}`,
 };
 
 export const pageRouter = {

@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { AxiosError } from 'axios';
+
 import { LoadingContext } from '@app/_context/loading';
 import api from '@app/_base/api';
 import { apiRouters } from '@app/_constants/routers';
@@ -18,16 +19,16 @@ import { ActiveIcon, DeleteIcon, EditIcon, SearchIcon } from 'public/icons';
 import Button from '@app/_components/common/Button';
 import Input from '@app/_components/common/Input';
 import ConfirmDelete from '@app/_components/modals/ConfirmDelete';
-import { TagForm } from '@app/_interfaces/tag';
+import { Tag, TagForm } from '@app/_interfaces/tag';
 import { ErrorResponse } from '@app/_interfaces';
 import CreateCategoryOrTagModal from '@app/_components/modals/CreateCategoryOrTagModal';
 
-const columnHelper = createColumnHelper<any>();
+const columnHelper = createColumnHelper<Tag>();
 
 const Tags = () => {
   const { setIsLoading } = useContext(LoadingContext);
-  const [data, setData] = useState<any[]>([]);
-  const [tagSelected, setTagSelected] = useState<any>();
+  const [data, setData] = useState<Tag[]>([]);
+  const [tagSelected, setTagSelected] = useState<Tag>();
   const [openModalCreateTag, setOpenModalCreateTag] = useState(false);
   const [openModalConfirmDelete, setOpenModalConfirmDelete] = useState(false);
   const [openModalUpdateTag, setOpenModalUpdateTag] = useState(false);
@@ -100,7 +101,7 @@ const Tags = () => {
   // GET TAG
   const getTags = async () => {
     setIsLoading(true);
-    return await api.get<any[]>(apiRouters.TAG_LIST);
+    return await api.get<Tag[]>(apiRouters.TAG_LIST);
   };
 
   const {
@@ -256,7 +257,7 @@ const Tags = () => {
         </thead>
         <tbody className="border font-normal">
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className="border-b">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   <div className="flex w-full h-full justify-center items-center my-1">
