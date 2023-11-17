@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import Modal from '../common/Modal';
@@ -6,15 +6,20 @@ import Input from '../common/Input';
 import Select from '../common/Select';
 import RichTextEditor from '../common/RichTextEditor';
 import Button from '../common/Button';
-import { PostForm } from '@app/_interfaces/post';
+import { CreationData, PostForm } from '@app/_interfaces/post';
 import TagsInput from '../common/TagsInput';
+import { OptionType } from '@app/_interfaces';
 type Props = {
   open: boolean;
+  creationData?: CreationData;
   onSubmit: SubmitHandler<PostForm>;
   onClose: () => void;
 };
 
-const CreatePostModal = ({ open, onClose, onSubmit }: Props) => {
+const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
+  const [categoryOption, setCategoryOption] = useState<OptionType[]>([]);
+  const [tagOption, setTagOption] = useState<OptionType[]>([]);
+
   const {
     register,
     control,
@@ -25,9 +30,33 @@ const CreatePostModal = ({ open, onClose, onSubmit }: Props) => {
     mode: 'onSubmit',
   });
 
+  useEffect(() => {
+    if (creationData) {
+      setCategoryOption([
+        ...categoryOption,
+        ...creationData.category.map((element) => ({
+          value: element.id,
+          label: element.name,
+        })),
+      ]);
+
+      setTagOption([
+        ...tagOption,
+        ...creationData.tag.map((element) => ({
+          value: element.id,
+          label: element.name,
+        })),
+      ]);
+    }
+  }, [creationData]);
+
   const handleCloseModal = () => {
     reset();
     onClose();
+  };
+
+  const checkKeyDown = (e: any) => {
+    if (e.key === 'Enter') e.preventDefault();
   };
 
   return (
@@ -36,39 +65,42 @@ const CreatePostModal = ({ open, onClose, onSubmit }: Props) => {
       title="Create Post"
       onClose={handleCloseModal}
       className="w-[calc(100vw_-_10rem)]">
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col gap-5"
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => checkKeyDown(e)}>
         <Input
           label="Title"
           placeholder="Title"
-          register={register('title')}
+          register={register('title', {
+            required: 'This field must not empty!',
+          })}
           className="w-full h-11 p-5 text-sm font-light"
+          error={errors.title?.message}
         />
         <Controller
           control={control}
           name="category"
-          defaultValue={{ value: '1', label: '1' }}
           render={({ field: { onChange, value } }) => (
             <Select
               label="Category"
               className="w-full h-11"
-              data={[
-                { label: '1', value: '1' },
-                { label: '2', value: '2' },
-              ]}
+              options={categoryOption}
               defaultOption={value}
               onSelectedOptionChange={onChange}
+              error={errors.category?.message}
             />
           )}
         />
         <Controller
           control={control}
           name="tag"
-          defaultValue={[]}
           render={({ field: { onChange, value } }) => (
             <TagsInput
               label="Tag"
-              defaultValue={value}
+              options={tagOption}
               onTagOptionChange={onChange}
+              error={errors.tag?.message}
             />
           )}
         />

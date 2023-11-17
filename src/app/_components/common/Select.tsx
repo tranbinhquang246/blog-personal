@@ -3,26 +3,29 @@ import { Listbox, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { DownIcon } from 'public/icons';
 import { OptionType } from '@app/_interfaces';
+import ErrorMessage from './ErrorMessage';
 
 type Props = {
   label?: string;
   defaultOption?: OptionType;
   placeholder?: string;
-  data: OptionType[];
+  options: OptionType[];
   required?: boolean;
   labelClassName?: string;
   className?: string;
+  error?: string;
   onSelectedOptionChange?: (option: OptionType) => void;
 };
 
 const Select = ({
   label,
-  data,
+  options,
   defaultOption,
   placeholder,
   required,
   labelClassName,
   className,
+  error,
   onSelectedOptionChange,
 }: Props) => {
   const [selected, setSelected] = useState<OptionType>();
@@ -77,7 +80,7 @@ const Select = ({
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0">
                   <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-10">
-                    {data.map((item, index) => {
+                    {options.map((item, index) => {
                       const isActive = item.value === selected?.value;
                       return (
                         <Listbox.Option
@@ -116,6 +119,7 @@ const Select = ({
           )}
         </Listbox>
       </div>
+      <ErrorMessage error={error} />
     </div>
   );
 };
