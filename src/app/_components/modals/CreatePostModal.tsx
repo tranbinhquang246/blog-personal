@@ -9,6 +9,7 @@ import Button from '../common/Button';
 import { CreationData, Post, PostForm } from '@app/_interfaces/post';
 import TagsInput from '../common/TagsInput';
 import { OptionType } from '@app/_interfaces';
+import ImageUpload from '../common/UploadImage';
 type Props = {
   open: boolean;
   creationData?: CreationData;
@@ -149,6 +150,13 @@ const CreatePostModal = ({
               onTagOptionChange={onChange}
               error={errors.tag?.message}
             />
+          )}
+        />
+        <Controller
+          control={control}
+          name="thumbnail"
+          render={({ field: { onChange } }) => (
+            <ImageUpload label="Thumbnail" onChange={onChange} />
           )}
         />
         <Controller

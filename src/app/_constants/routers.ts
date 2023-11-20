@@ -17,6 +17,7 @@ export const apiRouters = {
 
   POST_LIST: '/post',
   POST_DETAIL: (id: string) => `/post/${id}`,
+  THUMBNAIL_DETAIL: (id: string) => `/post/thumbnail/${id}`,
   CREATION_POST_DATA: '/post/creation-data',
 };
 

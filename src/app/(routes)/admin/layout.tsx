@@ -21,7 +21,7 @@ const adminLayout = async ({ children }: Props) => {
   }
   return (
     <div className={`relative flex justify-center flex-grow w-full h-full`}>
-      <aside className="flex w-16 lg:w-64 absolute h-full left-0 bg-lightgrey transition-all duration-300">
+      <aside className="flex w-16 lg:w-64 absolute h-full left-0 bg-dark transition-all duration-300">
         <SidebarAdmin />
       </aside>
       <main className="flex justify-center flex-grow h-full ml-16 lg:ml-64 overflow-x-auto">

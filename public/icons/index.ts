@@ -7,6 +7,7 @@ import MenuIcon from './menu.svg';
 import CloseIcon from './close.svg';
 import DefaultUserIcon from './default-user.svg';
 import DownIcon from './down.svg';
+import DownWhiteIcon from './down-white.svg';
 import SettingIcon from './setting.svg';
 import LogoutIcon from './logout.svg';
 import EyeIcon from './eye.svg';
@@ -22,6 +23,8 @@ import DeleteIcon from './delete.svg';
 import WarningIcon from './warning.svg';
 import ActiveIcon from './active.svg';
 import AddIcon from './add.svg';
+import AdminIcon from './admin.svg';
+import CloseWhiteIcon from './close-white.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -32,6 +35,7 @@ export {
   CloseIcon,
   DefaultUserIcon,
   DownIcon,
+  DownWhiteIcon,
   SettingIcon,
   LogoutIcon,
   EyeIcon,
@@ -47,4 +51,6 @@ export {
   WarningIcon,
   ActiveIcon,
   AddIcon,
+  AdminIcon,
+  CloseWhiteIcon,
 };
