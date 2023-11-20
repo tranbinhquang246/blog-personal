@@ -23,15 +23,15 @@ const navigation = [
 const SidebarAdmin = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col justify-between w-full border-r">
+    <div className="flex flex-col justify-between w-full border-r text-white">
       <div className="flex flex-col p-2">
         {navigation.map((element, index) => (
           <Link
             key={index}
             href={element.href}
             className={`${
-              pathname === element.href ? 'bg-white' : ''
-            } flex gap-3 p-3 rounded-md hover:bg-white`}>
+              pathname === element.href ? 'bg-slate-500' : 'hover:bg-slate-600'
+            } flex gap-3 p-3 rounded-md`}>
             <Image
               src={element.icon}
               alt={`Sidebar ${element.name} icon`}

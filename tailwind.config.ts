@@ -20,6 +20,7 @@ const config: Config = {
       ...colors,
       yellow: '#FFD050',
       purple: '#592EA9',
+      dark: '#232536',
       darkgrey: '#4C4C4C',
       mediumgray: '#6D6E76',
       lightgrey: '#F4F4F4',

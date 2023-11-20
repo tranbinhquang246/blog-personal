@@ -27,6 +27,7 @@ export interface PostForm {
   title: string;
   category: OptionType;
   tag?: OptionType[];
+  thumbnail?: any;
   content: string;
 }
 

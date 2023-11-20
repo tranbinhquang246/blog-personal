@@ -89,8 +89,7 @@ const TagsInput = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label
-          className={`block leading-5 mb-1 font-secondary ${labelClassName} text-neutral-01`}>
+        <label className={`block leading-5 mb-1 ${labelClassName} text-sm`}>
           {label}
           {required && <span className="text-danger align-super">*</span>}
         </label>
