@@ -14,6 +14,10 @@ export const apiRouters = {
 
   AUTHOR_LIST: '/author',
   AUTHOR_DETAIL: (id: string) => `/author/${id}`,
+
+  POST_LIST: '/post',
+  POST_DETAIL: (id: string) => `/post/${id}`,
+  CREATION_POST_DATA: '/post/creation-data',
 };
 
 export const pageRouter = {

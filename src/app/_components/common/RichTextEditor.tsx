@@ -6,6 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 type Props = {
   label?: string;
   required?: boolean;
+  defaultValue?: string;
   className?: string;
   classNameLabel?: string;
   classNameEditor?: string;
@@ -32,10 +33,11 @@ const RichTextEditor = ({
   classNameEditor,
   classNameLabel,
   label,
+  defaultValue,
   required,
   onEditorChange,
 }: Props) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
   useEffect(() => {
     onEditorChange && onEditorChange(value);
   }, [value, onEditorChange]);
