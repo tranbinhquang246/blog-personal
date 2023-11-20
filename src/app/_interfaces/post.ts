@@ -14,23 +14,33 @@ export interface Post {
 }
 
 interface CategoryPost {
+  id: string;
   category: Category;
 }
 
 interface TagPost {
+  id: string;
   tag: Tag;
 }
 
 export interface PostForm {
   title: string;
   category: OptionType;
-  tag: OptionType[];
+  tag?: OptionType[];
   content: string;
 }
 
 export interface PostData extends Omit<PostForm, 'tag' | 'category'> {
-  tag: string[];
+  tag: string[] | [];
   category: string;
+}
+
+export interface UpdateData extends Omit<PostForm, 'tag' | 'category'> {
+  tag: string[] | [];
+  categoryPostId: {
+    id: string;
+    category: string;
+  };
 }
 
 export interface CreationData {

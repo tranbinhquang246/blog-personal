@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import Modal from '../common/Modal';
@@ -6,19 +6,56 @@ import Input from '../common/Input';
 import Select from '../common/Select';
 import RichTextEditor from '../common/RichTextEditor';
 import Button from '../common/Button';
-import { CreationData, PostForm } from '@app/_interfaces/post';
+import { CreationData, Post, PostForm } from '@app/_interfaces/post';
 import TagsInput from '../common/TagsInput';
 import { OptionType } from '@app/_interfaces';
 type Props = {
   open: boolean;
   creationData?: CreationData;
+  data?: Post;
+  type?: 'create' | 'update';
   onSubmit: SubmitHandler<PostForm>;
   onClose: () => void;
 };
 
-const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
+const CreatePostModal = ({
+  open,
+  creationData,
+  data,
+  type,
+  onClose,
+  onSubmit,
+}: Props) => {
   const [categoryOption, setCategoryOption] = useState<OptionType[]>([]);
   const [tagOption, setTagOption] = useState<OptionType[]>([]);
+
+  const defaultValues = useMemo<PostForm>(() => {
+    if (type === 'update' && data) {
+      return {
+        title: data?.title,
+        category: {
+          label: data.category[0].category.name,
+          value: data.category[0].category.id,
+        },
+        tag: data.tag.map((item) => {
+          return {
+            label: item.tag.name,
+            value: item.tag.id,
+          };
+        }),
+        content: data?.content,
+      };
+    }
+    return {
+      title: '',
+      category: {
+        label: '',
+        value: '',
+      },
+      tag: undefined,
+      content: '',
+    };
+  }, [data, type]);
 
   const {
     register,
@@ -28,7 +65,12 @@ const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
     formState: { errors },
   } = useForm<PostForm>({
     mode: 'onSubmit',
+    defaultValues,
   });
+
+  useEffect(() => {
+    data && reset(defaultValues);
+  }, [data, reset, defaultValues]);
 
   useEffect(() => {
     if (creationData) {
@@ -66,7 +108,7 @@ const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
   return (
     <Modal
       open={open}
-      title="Create Post"
+      title={type === 'create' ? `Create Post` : `Update Post`}
       onClose={handleCloseModal}
       className="w-[calc(100vw_-_10rem)]">
       <form
@@ -103,6 +145,7 @@ const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
             <TagsInput
               label="Tag"
               options={tagOption}
+              defaultValue={value}
               onTagOptionChange={onChange}
               error={errors.tag?.message}
             />
@@ -111,9 +154,10 @@ const CreatePostModal = ({ open, creationData, onClose, onSubmit }: Props) => {
         <Controller
           control={control}
           name="content"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <RichTextEditor
               label="Content"
+              defaultValue={value}
               className="h-[486px]"
               classNameEditor="h-[420px]"
               onEditorChange={onChange}

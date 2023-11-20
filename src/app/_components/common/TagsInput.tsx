@@ -30,6 +30,12 @@ const TagsInput = ({
   const [optionTags, setOptionTag] = useState<OptionType[]>(options || []);
   const [filteredTags, setFilteredTag] = useState<OptionType[]>([]);
 
+  useEffect(() => {
+    const dataSet = new Set(defaultValue?.map((d) => d.value));
+    const remainingOptions = options?.filter((o) => !dataSet.has(o.value));
+    remainingOptions && setOptionTag(remainingOptions);
+  }, [defaultValue, options]);
+
   const handleKeyDown = (e: any) => {
     if (e.key !== 'Enter') return;
     const value = e.target.value;

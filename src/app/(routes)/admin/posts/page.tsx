@@ -15,7 +15,13 @@ import { toast } from 'react-toastify';
 
 import Button from '@app/_components/common/Button';
 import CreatePostModal from '@app/_components/modals/CreatePostModal';
-import { CreationData, Post, PostData, PostForm } from '@app/_interfaces/post';
+import {
+  CreationData,
+  Post,
+  PostData,
+  PostForm,
+  UpdateData,
+} from '@app/_interfaces/post';
 import api from '@app/_base/api';
 import { apiRouters } from '@app/_constants/routers';
 import { DeleteIcon, EditIcon, SearchIcon, UserIcon } from 'public/icons';
@@ -195,9 +201,46 @@ const Posts = () => {
     const postData: PostData = {
       ...values,
       category: values.category.value,
-      tag: values.tag.map((t) => t.value),
+      tag: values.tag?.map((t) => t.value) || [],
     };
     createPost(postData);
+  };
+
+  // UPDATE POST
+  const updatePostFn = async (data: UpdateData) => {
+    if (postSelected) {
+      setIsLoading(true);
+      return await api.patch(apiRouters.POST_DETAIL(postSelected.id), data);
+    }
+  };
+
+  const { mutate: updatePost } = useMutation({
+    mutationKey: ['postUpdatePost'],
+    mutationFn: updatePostFn,
+    onSuccess: async () => {
+      toast.success('Update post successfully');
+      refetchListPosts();
+      setOpenModalUpdatePost(false);
+    },
+    onError: (errors: AxiosError<ErrorResponse>) => {
+      toast.error(errors.response?.data.message);
+    },
+    onSettled: () => {
+      setIsLoading(false);
+    },
+  });
+  const onSubmitUpdateTag: SubmitHandler<PostForm> = (values) => {
+    if (postSelected) {
+      const postData: UpdateData = {
+        ...values,
+        categoryPostId: {
+          id: postSelected?.category[0].id,
+          category: values.category.value,
+        },
+        tag: values.tag?.map((t) => t.value) || [],
+      };
+      updatePost(postData);
+    }
   };
 
   // DELETE POST
@@ -284,9 +327,19 @@ const Posts = () => {
       </table>
       <CreatePostModal
         open={openModalCreatePost}
+        type="create"
         creationData={listCreationData?.data}
         onSubmit={onSubmitCreatePost}
         onClose={() => setOpenModalCreatePost(false)}></CreatePostModal>
+
+      <CreatePostModal
+        open={openModalUpdatePost}
+        type="update"
+        data={postSelected}
+        creationData={listCreationData?.data}
+        onSubmit={onSubmitUpdateTag}
+        onClose={() => setOpenModalUpdatePost(false)}></CreatePostModal>
+
       <ConfirmDelete
         open={openModalConfirmDelete}
         variant="Post"
