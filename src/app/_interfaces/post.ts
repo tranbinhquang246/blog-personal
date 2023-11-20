@@ -11,6 +11,8 @@ export interface Post {
   id: string;
   title: string;
   user: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface CategoryPost {
