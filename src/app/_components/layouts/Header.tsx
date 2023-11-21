@@ -113,7 +113,7 @@ const Header = ({}: Props) => {
                     leaveTo="opacity-0 translate-y-1">
                     <Disclosure.Panel className="absolute right-0 flex flex-col text-sm font-normal rounded-md min-w-[128px] bg-dark text-white transition-all duration-300 z-10">
                       <Link
-                        href={'/'}
+                        href={pageRouter.PROFILE}
                         className="flex gap-2 hover:bg-slate-600 p-3">
                         <Image
                           alt="Setting profile"
@@ -217,7 +217,7 @@ const Header = ({}: Props) => {
                       </p>
                     </div>
                     <Link
-                      href={'/'}
+                      href={pageRouter.PROFILE}
                       className="flex gap-2 hover:bg-slate-600 rounded-lg py-2 px-5">
                       <Image
                         alt="Setting profile"

@@ -16,3 +16,14 @@ export interface ProfileUser {
   lastName: string;
   userId: string;
 }
+
+export interface ProfileUserForm {
+  firstName: string;
+  lastName: string;
+}
+
+export interface ChangePasswordForm {
+  oldPassword: string;
+  password: string;
+  confirmPassword: string;
+}

@@ -63,7 +63,7 @@ const UserManagement = () => {
             id: 'avatar',
             cell: (info) => (
               <Image
-                className="rounded-full"
+                className="rounded-full w-8 h-8"
                 alt="Avatar user"
                 src={info.getValue() || UserIcon}
                 width={32}

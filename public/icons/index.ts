@@ -25,6 +25,8 @@ import ActiveIcon from './active.svg';
 import AddIcon from './add.svg';
 import AdminIcon from './admin.svg';
 import CloseWhiteIcon from './close-white.svg';
+import DefaultUserBlackIcon from './default-user-black.svg';
+import UploadIcon from './upload.svg';
 export {
   KeyIcon,
   UserIcon,
@@ -53,4 +55,6 @@ export {
   AddIcon,
   AdminIcon,
   CloseWhiteIcon,
+  DefaultUserBlackIcon,
+  UploadIcon,
 };
