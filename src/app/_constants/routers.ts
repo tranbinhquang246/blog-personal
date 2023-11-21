@@ -25,6 +25,8 @@ export const pageRouter = {
   HOME: '/',
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
+  BLOG: '/blogs',
+  BLOG_DETAIL: (id: string) => `blogs/${id}`,
 };
 
 export const adminRouter = {
