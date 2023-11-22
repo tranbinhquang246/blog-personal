@@ -5,6 +5,8 @@ export const apiRouters = {
   GET_USERS: '/users/all',
   GET_USER: (id: string) => `/users/${id}`,
   DELETE_USER: (id: string) => `users/delete/${id}`,
+  CHANGE_PROFILE: (id: string) => `/users/change-profile/${id}`,
+  CHANGE_PASSWORD: (id: string) => `/users/change-password/${id}`,
 
   CATEGORY_LIST: '/category',
   CATEGORY_DETAIL: (id: string) => `/category/${id}`,
@@ -26,7 +28,8 @@ export const pageRouter = {
   LOGIN: '/auth/login',
   SIGNUP: '/auth/signup',
   BLOG: '/blogs',
-  BLOG_DETAIL: (id: string) => `blogs/${id}`,
+  BLOG_DETAIL: (id: string) => `/blogs/${id}`,
+  PROFILE: '/profile',
 };
 
 export const adminRouter = {

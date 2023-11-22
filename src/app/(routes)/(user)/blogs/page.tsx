@@ -14,7 +14,6 @@ import { FORMAT_DATE_USER } from '@app/_constants';
 import Link from 'next/link';
 import Select from '@app/_components/common/Select';
 import { OptionType } from '@app/_interfaces';
-import { DownIcon } from 'public/icons';
 
 const Blogs = () => {
   const { setIsLoading } = useContext(LoadingContext);
@@ -57,9 +56,7 @@ const Blogs = () => {
   // GET POST
   const getPosts = async () => {
     setIsLoading(true);
-    return await api.get<Post[]>(
-      `${apiRouters.POST_LIST}?search=${filterPost.search}&category=${filterPost.category}&tag=${filterPost.tag}&page=${filterPost.page}`
-    );
+    return await api.get<Post[]>(`${apiRouters.POST_LIST}`);
   };
 
   const {
@@ -143,11 +140,13 @@ const Blogs = () => {
                   height={318}
                   className="w-2/5"
                 />
-                <div className="flex flex-col justify-center gap-5">
+                <div className="flex flex-col justify-center gap-5 w-3/5">
                   <p className="text-purple tracking-widest">
                     {element.category[0].category.name}
                   </p>
-                  <p className="font-semibold text-2xl">{element.title}</p>
+                  <p className="font-semibold text-2xl truncate">
+                    {element.title}
+                  </p>
                   <p className="font-light">
                     Duis aute irure dolor in reprehenderit in voluptate velit
                     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint

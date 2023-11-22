@@ -85,7 +85,7 @@ const Posts = () => {
         id: 'avatar user',
         cell: (info) => (
           <Image
-            className="rounded-full"
+            className="rounded-full w-8 h-8"
             alt="Avatar user"
             src={info.getValue().profile.avatar || UserIcon}
             width={32}
@@ -131,9 +131,9 @@ const Posts = () => {
     return await api.get<CreationData>(apiRouters.CREATION_POST_DATA);
   };
 
-  const { data: listCreationData } = useQuery({
-    enabled: true,
-    refetchOnMount: true,
+  const { data: listCreationData, refetch: refetchCreationData } = useQuery({
+    enabled: false,
+    refetchOnMount: false,
     queryKey: ['getCreationData'],
     queryFn: getCreationData,
     staleTime: Infinity,
@@ -150,12 +150,17 @@ const Posts = () => {
     refetch: refetchListPosts,
     isFetched: isFetchedListPosts,
   } = useQuery({
-    enabled: true,
-    refetchOnMount: true,
+    enabled: false,
+    refetchOnMount: false,
     queryKey: ['getListPosts'],
     queryFn: getPosts,
     staleTime: Infinity,
   });
+
+  useEffect(() => {
+    refetchListPosts();
+    refetchCreationData();
+  }, []);
 
   useEffect(() => {
     if (isFetchedListPosts) {
