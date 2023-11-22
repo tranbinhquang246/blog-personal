@@ -8,6 +8,9 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { AxiosError } from 'axios';
@@ -28,6 +31,7 @@ import { DeleteIcon, EditIcon, SearchIcon, UserIcon } from 'public/icons';
 import { LoadingContext } from '@app/_context/loading';
 import { ErrorResponse } from '@app/_interfaces';
 import ConfirmDelete from '@app/_components/modals/ConfirmDelete';
+import Pagination from '@app/_components/common/Pagination';
 
 const columnHelper = createColumnHelper<Post>();
 
@@ -35,20 +39,16 @@ const Posts = () => {
   const { setIsLoading } = useContext(LoadingContext);
   const [data, setData] = useState<Post[]>([]);
   const [postSelected, setPostSelected] = useState<Post>();
+  const [globalFilter, setGlobalFilter] = useState('');
   const [openModalConfirmDelete, setOpenModalConfirmDelete] = useState(false);
   const [openModalUpdatePost, setOpenModalUpdatePost] = useState(false);
   const [openModalCreatePost, setOpenModalCreatePost] = useState(false);
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor((row) => row.id, {
-        id: 'id',
-        cell: (info) => <p className="w-20 truncate">{info.getValue()}</p>,
-        header: () => <span>ID</span>,
-      }),
       columnHelper.accessor((row) => row.title, {
         id: 'title',
-        cell: (info) => <p className="w-20 truncate">{info.getValue()}</p>,
+        cell: (info) => <p className="w-60 truncate">{info.getValue()}</p>,
         header: () => <span>Title</span>,
       }),
       columnHelper.accessor((row) => row.category, {
@@ -57,7 +57,9 @@ const Posts = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p
+                  key={index}
+                  className="w-60 truncate flex items-center justify-center">
                   - {item.category.name}
                 </p>
               );
@@ -72,7 +74,9 @@ const Posts = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p
+                  key={index}
+                  className="w-60 truncate flex items-center justify-center">
                   - {item.tag.name}
                 </p>
               );
@@ -174,10 +178,22 @@ const Posts = () => {
     }
   }, [listPosts]);
 
-  const table = useReactTable({
+  const table = useReactTable<Post>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      globalFilter,
+    },
+    initialState: {
+      pagination: {
+        pageSize: 10,
+      },
+    },
   });
 
   // CREATE POST
@@ -287,6 +303,8 @@ const Posts = () => {
       <div className="flex gap-3">
         <div className="relative w-full h-full">
           <Input
+            value={globalFilter ?? ''}
+            onChange={(event) => setGlobalFilter(String(event.target.value))}
             placeholder="Search..."
             className="h-full pl-8 pr-3 py-3 w-1/3 min-w-[180px]"
           />
@@ -330,6 +348,7 @@ const Posts = () => {
           ))}
         </tbody>
       </table>
+      <Pagination table={table} />
       <CreatePostModal
         open={openModalCreatePost}
         type="create"
