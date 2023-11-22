@@ -37,7 +37,7 @@ const Tags = () => {
     () => [
       columnHelper.accessor((row) => row.id, {
         id: 'id',
-        cell: (info) => <p className="w-20 truncate">{info.getValue()}</p>,
+        cell: (info) => <p className="w-40 truncate">{info.getValue()}</p>,
         header: () => <span>ID</span>,
       }),
       columnHelper.accessor((row) => row.name, {

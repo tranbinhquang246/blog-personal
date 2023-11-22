@@ -37,12 +37,12 @@ const Authors = () => {
     () => [
       columnHelper.accessor((row) => row.fullName, {
         id: 'fullName',
-        cell: (info) => <p className="w-20 truncate">{info.getValue()}</p>,
+        cell: (info) => <p className="w-40 truncate">{info.getValue()}</p>,
         header: () => <span>Full Name</span>,
       }),
       columnHelper.accessor((row) => row.aliasName, {
         id: 'aliasName',
-        cell: (info) => <p className="w-20 truncate">{info.getValue()}</p>,
+        cell: (info) => <p className="w-40 truncate">{info.getValue()}</p>,
         header: () => <span>Alias Name</span>,
       }),
       columnHelper.accessor((row) => row.introduction, {
@@ -56,7 +56,7 @@ const Authors = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p key={index} className="w-40 truncate">
                   - {item}
                 </p>
               );
@@ -71,7 +71,7 @@ const Authors = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p key={index} className="w-40 truncate">
                   - {item}
                 </p>
               );
@@ -86,7 +86,7 @@ const Authors = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p key={index} className="w-40 truncate">
                   - {item}
                 </p>
               );
@@ -101,7 +101,7 @@ const Authors = () => {
           <ul>
             {info.getValue().map((item, index) => {
               return (
-                <p key={index} className="w-20 truncate">
+                <p key={index} className="w-40 truncate">
                   - {item}
                 </p>
               );
