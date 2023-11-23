@@ -3,10 +3,7 @@ import Image from 'next/image';
 import ErrorMessage from './ErrorMessage';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-export type InputSize = 'sm' | 'md' | 'lg' | 'xl';
-
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  sz?: InputSize;
   label?: string;
   type?: string;
   labelClassName?: string;
@@ -17,7 +14,6 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const Input = ({
-  sz = 'md',
   label,
   type = 'text',
   labelClassName,

@@ -21,12 +21,6 @@ const Blogs = () => {
   const [categoryOption, setCategoryOption] = useState<OptionType[]>([
     { label: 'All', value: '' },
   ]);
-  const [filterPost, setFilterPost] = useState({
-    page: 1,
-    category: '',
-    tag: '',
-    search: '',
-  });
 
   // GET CREATION DATA
   const getCreationData = async () => {
@@ -59,11 +53,7 @@ const Blogs = () => {
     return await api.get<Post[]>(`${apiRouters.POST_LIST}`);
   };
 
-  const {
-    data: listPosts,
-    refetch: refetchListPosts,
-    isFetched: isFetchedListPosts,
-  } = useQuery({
+  const { data: listPosts, isFetched: isFetchedListPosts } = useQuery({
     enabled: true,
     refetchOnMount: true,
     queryKey: ['getListPosts'],
@@ -83,7 +73,7 @@ const Blogs = () => {
     }
   }, [listPosts]);
 
-  const onChangeFilter = (options: OptionType) => {};
+  const onChangeFilter = () => {};
 
   return (
     <div className="flex flex-col w-full h-full">

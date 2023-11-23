@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, ReactNode, useState } from 'react';
+import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
@@ -9,7 +9,6 @@ import { usePathname } from 'next/navigation';
 import { AuthenticationStatus, RoleTypes } from '@app/_constants/enums';
 import {
   AdminIcon,
-  CloseIcon,
   CloseWhiteIcon,
   DefaultUserIcon,
   DownWhiteIcon,
@@ -20,7 +19,6 @@ import {
 import { logo } from 'public/images';
 import { adminRouter, pageRouter } from '@app/_constants/routers';
 
-type Props = { className?: string; link?: string; children?: ReactNode };
 const navigation = [
   { name: 'Home', href: pageRouter.HOME },
   { name: 'Blogs', href: '/blogs' },
@@ -28,7 +26,7 @@ const navigation = [
   { name: 'Contact me', href: '/contact-me' },
 ];
 
-const Header = ({}: Props) => {
+const Header = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -74,7 +72,7 @@ const Header = ({}: Props) => {
             </Link>
           ) : (
             <Disclosure as="div" className="relative">
-              {({}) => (
+              {() => (
                 <>
                   <Disclosure.Button
                     className="flex w-full gap-1 items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7"
