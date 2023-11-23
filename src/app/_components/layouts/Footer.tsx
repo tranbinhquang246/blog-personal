@@ -1,9 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { FacebookIcon, InstagramIcon, TiktokIcon } from 'public/icons';
-import { logo } from 'public/images';
-
-type Props = { className?: string };
 
 const navigation = {
   main: [
@@ -32,7 +28,7 @@ const navigation = {
   ],
 };
 
-const Footer = ({ className }: Props) => {
+const Footer = () => {
   return (
     <footer className="bg-dark text-white border-t-[1px]">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-4 sm:py-6 lg:px-8">

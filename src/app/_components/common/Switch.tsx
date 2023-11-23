@@ -29,10 +29,9 @@ const SwitchComponent = ({
   style,
   error,
   onSwitchChange,
-  ...props
 }: SwitchProps) => {
   const [enabled, setEnabled] = useState(checked);
-  let variantClassNames = {
+  const variantClassNames = {
     background: '',
     thumb: '',
     text: '',

@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react';
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {};
+type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({ className, children, ...props }: Props) {
   return (

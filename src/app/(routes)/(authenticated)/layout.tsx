@@ -1,10 +1,8 @@
 import { getServerSession } from 'next-auth';
 import React, { ReactNode } from 'react';
+import { redirect } from 'next/navigation';
 
 import { options } from '@app/api/auth/[...nextauth]/options';
-import { redirect } from 'next/navigation';
-import { RoleTypes } from '@app/_constants/enums';
-import SidebarAdmin from '@app/_components/admin/Sidebar';
 
 type Props = {
   children: ReactNode;

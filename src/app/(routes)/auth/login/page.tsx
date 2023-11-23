@@ -129,7 +129,7 @@ export default function Login() {
         </Button>
       </form>
       <div className="flex gap-2 text-center">
-        <p className="font-light">Don't have an account? </p>
+        <p className="font-light">{`Don't have an account?`} </p>
         <Link href={pageRouter.SIGNUP} className="hover:underline">
           Sign up
         </Link>

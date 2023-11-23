@@ -6,7 +6,7 @@ type Props<T> = {
   table: Table<T>;
 };
 
-const itemToShow = [10, 20, 30, 40, 50];
+// const itemToShow = [10, 20, 30, 40, 50];
 const Pagination = <T,>({ table }: Props<T>) => {
   return (
     <div className="flex items-center gap-2">

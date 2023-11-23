@@ -1,8 +1,6 @@
 import React from 'react';
 
-type Props = {};
-
-const AboutMe = (props: Props) => {
+const AboutMe = () => {
   return <div>AboutMe</div>;
 };
 
